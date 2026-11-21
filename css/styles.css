@@ -1,0 +1,181 @@
+/* ==========================================================================
+   FamVault - Core Stylesheet
+   Modern Vault Aesthetic, Glassmorphism, Micro-interactions & Print Styles
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-red: #ef4444;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #030712;
+  color: #f1f5f9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+
+/* Glassmorphism & Background Glows */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(51, 65, 85, 0.4);
+}
+
+.glass-nav {
+  background: rgba(3, 7, 18, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(30, 41, 59, 0.8);
+}
+
+.vault-ambient-bg {
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+    radial-gradient(at 90% 20%, rgba(245, 158, 11, 0.06) 0px, transparent 40%),
+    radial-gradient(at 50% 90%, rgba(99, 102, 241, 0.06) 0px, transparent 50%);
+}
+
+/* Form Inputs */
+.form-input {
+  width: 100%;
+  background-color: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(51, 65, 85, 0.8);
+  border-radius: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  color: #f8fafc;
+  font-size: 0.875rem;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  background-color: rgba(2, 6, 23, 1);
+}
+
+.form-input::placeholder {
+  color: #64748b;
+}
+
+/* Pill Navigation Scrollbar Hide */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Active Pill Highlight Animations */
+.member-pill.active {
+  background-color: rgba(30, 41, 59, 1);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.15);
+}
+
+/* Modal Transitions */
+.modal {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+/* Pulse Glow for SOS Mode */
+@keyframes sosGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    border-color: rgba(239, 68, 68, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.7);
+    border-color: rgba(239, 68, 68, 1);
+  }
+}
+
+.sos-active-ring {
+  animation: sosGlow 2s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   PRINT MEDIA STYLES - FOR OFFICIAL POLICE REPORT & INVOICES
+   ========================================================================== */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  /* Hide everything except the printable document */
+  header, 
+  nav, 
+  #sos-emergency-drawer, 
+  #family-member-pills, 
+  #category-filter-pills, 
+  #documents-grid, 
+  #toast-container,
+  .print-hide,
+  .btn-close-modal,
+  #modal-police-report > div:first-child, /* backdrop */
+  #btn-print-police-report,
+  #btn-copy-fir-text {
+    display: none !important;
+  }
+
+  /* Make sure modal content takes full printable page */
+  #modal-police-report {
+    display: block !important;
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  #modal-police-report > div:last-child {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #police-report-printable {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
